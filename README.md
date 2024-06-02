@@ -6,7 +6,7 @@ A simple real-time chat application using Socket.IO. Users can join chat rooms a
 ## 🚀 Installation
 1. Clone the repository:
     ```bash
-    git clone https://github.com/yourusername/realtime-chat.git
+    git clone https://github.com/itsrajeev123/realtime-chat.git
     cd realtime-chat
     ```
 2. Install dependencies:
