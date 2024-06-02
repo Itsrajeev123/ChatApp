@@ -20,6 +20,5 @@ A simple real-time chat application using Socket.IO. Users can join chat rooms a
 4. Open your browser and go to `http://localhost:3000`.
 
 ## Usage
-- Sign up or log in.
 - Join or create a chat room.
 - Start chatting!
