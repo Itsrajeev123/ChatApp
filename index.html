@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chat App</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+    <div class="chat-container">
+        <div class="chat-header">
+            <h2>Talkify</h2>
+        </div>
+        <ul id="messages"></ul>
+        <form id="form" action="">
+            <input id="input" type="text" autocomplete="off" placeholder="Type your message here..." required>
+            <button>Send</button>
+        </form>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        const socket = io();
+        const username = (Math.random() < 0.5) ? 'Dhoni' : 'Kohli'; // Fixed usernames
+
+        // Send message
+        const form = document.getElementById('form');
+        const input = document.getElementById('input');
+
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            if (input.value) {
+                const message = input.value;
+                socket.emit('chat message', { username, message }); // Sending username along with the message
+                input.value = '';
+            }
+        });
+
+        // Receive message
+        socket.on('chat message', ({ username, message }) => {
+            const item = document.createElement('li');
+            item.innerHTML = `<span class="username">${username}:</span> ${message}`;
+            document.getElementById('messages').appendChild(item);
+            window.scrollTo(0, document.body.scrollHeight);
+        });
+    </script>
+</body>
+</html>
