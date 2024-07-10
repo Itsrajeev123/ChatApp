@@ -2,7 +2,7 @@
 
 Welcome to the **Real-Time Chat Application** project! This application allows users to communicate with each other in real-time using modern web technologies.
 
-![Chat Application](https://media.giphy.com/media/l4FGwHEUCGILz14aY/giphy.gif)
+![Chat Application]
 
 ## 🚀 Features
 
