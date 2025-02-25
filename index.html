@@ -1,0 +1,210 @@
+<!-- 
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chat App</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>  
+    <div class="chat-container">
+        <div class="chat-header">
+            <h2>Talkify</h2>
+        </div>
+        <ul id="messages"></ul>
+        <form id="form" action="">
+            <input id="input" type="text" autocomplete="off" placeholder="Type your message here..." required>
+            <button>Send</button>
+        </form>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        const socket = io();
+        const username = prompt("Enter your username (Dhoni or Kohli):"); // Fixed usernames
+
+        // Send message
+        const form = document.getElementById('form');
+        const input = document.getElementById('input');
+
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            if (input.value) {
+                const message = input.value;
+                socket.emit('chat message', { username, message }); // Sending username along with the message
+                input.value = '';
+            }
+        });
+ 
+        // Receive message
+        socket.on('chat message', ({ username, message }) => {
+            const item = document.createElement('li');
+            item.innerHTML = `<span class="username">${username}:</span> ${message}`;
+            document.getElementById('messages').appendChild(item);
+            window.scrollTo(0, document.body.scrollHeight);
+        });
+    </script>
+</body>  
+</html>
+   -->
+
+
+
+   <!-- <!DOCTYPE html>
+<html>
+<head>
+    <title>Chat App</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>  
+    <div class="chat-container">
+        <div class="chat-header">
+            <h2>Talkify</h2>
+        </div>
+        <ul id="messages"></ul>
+        <form id="form" action="">
+            <input id="input" type="text" autocomplete="off" placeholder="Type your message here..." required>
+            <button>Send</button>
+        </form>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        // Ask the user to enter their unique username at the start
+        const username = prompt("Enter your username:");
+
+        // Connect to the socket.io server
+        const socket = io("https://chatapp-backend.onrender.com");
+
+        // Send message
+        const form = document.getElementById('form');
+        const input = document.getElementById('input');
+
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            if (input.value) {
+                const message = input.value;
+                // Send the message along with the user's username
+                socket.emit('chat message', { username, message });
+                input.value = '';
+            }
+        });
+
+        // Receive message from server
+        socket.on('chat message', ({ username, message }) => {
+            const item = document.createElement('li');
+            item.innerHTML = `<span class="username">${username}:</span> ${message}`;
+            document.getElementById('messages').appendChild(item);
+            window.scrollTo(0, document.body.scrollHeight);
+        });
+    </script>
+</body>  
+</html> -->
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Talkify - Chat App</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>  
+    <div class="chat-container">
+        <div class="chat-header">
+            <h2>Talkify 💬</h2>
+        </div>
+        <ul id="messages"></ul>
+        <form id="form" action="">
+            <input id="input" type="text" autocomplete="off" placeholder="Type your message..." required>
+            <button>Send</button>
+        </form>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        const username = prompt("Enter your username:") || "Anonymous";
+        const socket = io("http://localhost:3000");
+
+        const form = document.getElementById('form');
+        const input = document.getElementById('input');
+        const messages = document.getElementById('messages');
+
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            if (input.value.trim()) {
+                socket.emit('chat message', { username, message: input.value.trim() });
+                input.value = '';
+            }
+        });
+
+        socket.on('chat message', ({ username, message }) => {
+            const item = document.createElement('li');
+            item.innerHTML = `<strong>${username}:</strong> ${message}`;
+            item.classList.add("message");
+            messages.appendChild(item);
+            messages.scrollTop = messages.scrollHeight;
+        });
+    </script>
+</body>  
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Talkify - Chat App</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>  
+    <div class="chat-container">
+        <div class="chat-header">
+            <h2>Talkify 💬</h2>
+            <button id="dark-mode-toggle">🌙</button>
+        </div>
+        <ul id="messages"></ul>
+        <form id="form" action="">
+            <input id="input" type="text" autocomplete="off" placeholder="Type your message..." required>
+            <button>Send</button>
+        </form>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        const username = prompt("Enter your username:") || "Anonymous";
+        const socket = io("http://localhost:3000");
+
+        const form = document.getElementById('form');
+        const input = document.getElementById('input');
+        const messages = document.getElementById('messages');
+        const darkModeToggle = document.getElementById('dark-mode-toggle');
+        
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            if (input.value.trim()) {
+                socket.emit('chat message', { username, message: input.value.trim() });
+                input.value = '';
+            }
+        });
+
+        socket.on('chat message', ({ username, message }) => {
+            const item = document.createElement('li');
+            item.innerHTML = `<strong>${username}:</strong> ${message}`;
+            item.classList.add("message");
+            messages.appendChild(item);
+            messages.scrollTop = messages.scrollHeight;
+        });
+
+        // Dark Mode Toggle
+        darkModeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            if (document.body.classList.contains('dark-mode')) {
+                darkModeToggle.textContent = "☀️";
+            } else {
+                darkModeToggle.textContent = "🌙";
+            }
+        });
+    </script>
+</body>  
+</html>
